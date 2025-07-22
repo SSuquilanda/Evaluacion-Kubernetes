@@ -76,16 +76,16 @@ Finalmente, desplegaremos la aplicación en nuestro clúster de Kubernetes.
 
 ### Paso 4: Verificar el Despliegue
 
-1.  Comprueba que los Pods se están ejecutando correctamente en el namespace `universidades-ns`:
+1.  Comprueba que los Pods se están ejecutando correctamente en el namespace `universidades`:
     ```bash
-    kubectl get pods -n universidades-ns
+    kubectl get pods -n universidades
     ```
     Deberías ver los pods del backend y la base de datos en estado `Running`.
 
 2.  Para acceder a la aplicación, necesitarás exponer el servicio. Si estás en un entorno local, puedes usar `port-forward`:
     ```bash
     # Reemplaza <nombre-del-pod-backend> con el nombre real de tu pod
-    kubectl port-forward pod/<nombre-del-pod-backend> 8080:8080 -n universidades-ns
+    kubectl port-forward pod/<nombre-del-pod-backend> 8080:8080 -n universidades
     ```
 
 3.  Ahora, la API debería estar accesible en `http://localhost:8080` en tu máquina local.

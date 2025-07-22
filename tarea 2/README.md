@@ -17,7 +17,7 @@ Este directorio contiene los archivos necesarios para containerizar la API de un
 
 2.  **Construye la imagen y levanta los contenedores:**
     ```bash
-    docker-compose up --build
+    docker build -t ssuquilanda/universidades-api:latest .
     ```
 
     Este comando leerá el `Dockerfile` para construir la imagen de la API y luego usará `docker-compose.yml` para iniciar el contenedor de la aplicación.
