@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: universidades-api
+  namespace: universidades
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: universidades-api
+  template:
+    metadata:
+      labels:
+        app: universidades-api
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: busybox
+          command: ['sh', '-c', 'until nc -z postgres 5432; do echo waiting for postgres; sleep 2; done;']
+
+      containers:
+        - name: universidades-api
+          image: ssuquilanda/universidades-api:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres:5432/universidadesdb
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: root
