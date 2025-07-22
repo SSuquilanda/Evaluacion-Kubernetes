@@ -82,10 +82,8 @@ Finalmente, desplegaremos la aplicación en nuestro clúster de Kubernetes.
     ```
     Deberías ver los pods del backend y la base de datos en estado `Running`.
 
-2.  Para acceder a la aplicación, necesitarás exponer el servicio. Si estás en un entorno local, puedes usar `port-forward`:
+2.  Para acceder a la aplicación, primero obtén la dirección IP externa asignada al `LoadBalancer`:
     ```bash
-    # Reemplaza <nombre-del-pod-backend> con el nombre real de tu pod
-    kubectl port-forward pod/<nombre-del-pod-backend> 8080:8080 -n universidades
+    kubectl get service universidades-api -n universidades -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
     ```
-
-3.  Ahora, la API debería estar accesible en `http://localhost:8080` en tu máquina local.
+    Una vez que tengas la IP, la API estará accesible en `http://<IP-EXTERNA>:8080`.

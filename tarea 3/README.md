@@ -44,7 +44,7 @@ Este directorio contiene los manifiestos de Kubernetes (`.yml`) necesarios para 
     # ... (resto del archivo)
     ```
 
--   `backend-service.yml`: Expone la API al exterior del clúster utilizando un `Service` de tipo `NodePort`.
+-   `backend-service.yml`: Expone la API al exterior del clúster utilizando un `Service` de tipo `LoadBalancer`.
 
     ```yaml
     apiVersion: v1
@@ -53,13 +53,12 @@ Este directorio contiene los manifiestos de Kubernetes (`.yml`) necesarios para 
       name: universidades-api
       namespace: universidades
     spec:
-      type: NodePort
+      type: LoadBalancer
       selector:
         app: universidades-api
       ports:
         - port: 8080
           targetPort: 8080
-          nodePort: 30080
     ```
 
 ## Cómo Desplegar
